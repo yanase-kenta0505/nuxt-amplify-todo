@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+  
     "target": "ES2018",
     "module": "ESNext",
     "moduleResolution": "Node",
@@ -25,7 +26,8 @@
     },
     "types": [
       "@nuxt/types",
-      "@types/node"
+      "@types/node",
+      "vuetify"
     ]
   },
   "exclude": [
