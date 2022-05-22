@@ -15,7 +15,6 @@
           <h2 class="white--text">タスク管理画面へ</h2>
         </v-btn>
         </v-card>
-      </v-card>
     </v-app>
 </template>
 

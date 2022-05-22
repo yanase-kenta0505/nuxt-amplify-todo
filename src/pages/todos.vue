@@ -149,7 +149,6 @@ export default defineComponent({
 
     const changeTodoselected = (index: number) => {
       if (storeTodos.value[index].done) return;
-      // storeTodos.value[index].selected = !storeTodos.value[index].selected;
       accessor.todos.changeTodoselected(index);
     };
 

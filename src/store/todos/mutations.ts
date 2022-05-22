@@ -1,12 +1,9 @@
-// Vuexに型をつけるために使用
 import { mutationTree } from "typed-vuex";
 import { TodosType, Item } from "~/types/data";
+import  state  from "./state";
 
-export const state = () => ({
-  storeTodos: [] as TodosType[],
-});
 
-export const mutations = mutationTree(state, {
+ const mutations = mutationTree(state, {
   addTodo(state, newTodoItem: TodosType) {
     state.storeTodos.push(newTodoItem);
   },
@@ -38,3 +35,5 @@ export const mutations = mutationTree(state, {
     state.storeTodos[index].selected = !state.storeTodos[index].selected;
   },
 });
+
+export default mutations
