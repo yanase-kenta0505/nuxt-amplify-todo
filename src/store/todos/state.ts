@@ -1,4 +1,4 @@
-import { TodosType } from "~/types/data";
+import { TodosType } from "~~/types/data";
 
 const state = () => ({
   storeTodos: [] as TodosType[],

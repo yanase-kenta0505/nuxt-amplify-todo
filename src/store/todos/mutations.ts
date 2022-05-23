@@ -1,5 +1,5 @@
 import { mutationTree } from "typed-vuex";
-import { TodosType } from "~/types/data";
+import { TodosType } from "~~/types/data";
 import state from "./state";
 
 export default mutationTree(state, {
