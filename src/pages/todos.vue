@@ -82,25 +82,23 @@
         </v-list-item-group>
       </v-list>
     </v-card>
-    <v-card width="600px" class="mx-auto mt-5"> </v-card>
+    <v-card width="600px" height="50" class="mx-auto mt-5">
+      <ReturnTopPage />
+    </v-card>
   </v-app>
 </template>
 
 <script lang="ts">
-import {
-  defineComponent,
-  ref,
-  computed,
-} from "@nuxtjs/composition-api";
+import { defineComponent, ref, computed } from "@nuxtjs/composition-api";
 
-import type { TodosType } from "~/types/data"
+import type { TodosType } from "~/types/data";
 import { Status } from "~/enums/Status";
 import { useAccessor } from "~/hooks/useAccessor";
+import ReturnTopPage from "~/components/ReturnTopPage.vue";
 
 export default defineComponent({
   setup() {
     const accessor = useAccessor();
-
     //v-text-fieldに入力された値が反映される
     const newTaskName = ref("");
     const toggleStatus = ref(Status.All);
@@ -108,7 +106,6 @@ export default defineComponent({
       const state_storeTodos = accessor.todos.storeTodos;
       return JSON.parse(JSON.stringify(state_storeTodos));
     });
-
     //絞り込みのボタンが押されるたびに（toggleStatusの内容が変わるたびに）表示するタスクを変更
     const filteredTodos = computed(() => {
       switch (toggleStatus.value) {
@@ -124,7 +121,6 @@ export default defineComponent({
           return storeTodos.value;
       }
     });
-
     //完了していないタスクの個数を集計する
     const findDoneItemLength = computed(() => {
       const findDoneItem = storeTodos.value.filter(
@@ -132,26 +128,21 @@ export default defineComponent({
       );
       return findDoneItem.length;
     });
-
     const changeTodoDone = (id: string) => {
       accessor.todos.changeTodoDone(id);
     };
-
     const addTodo = (newTask: TodosType) => {
       if (newTask.taskName === "") return;
       accessor.todos.addTodo(newTask);
       newTaskName.value = "";
     };
-
     const deleteTodo = (index: number) => {
       accessor.todos.deleteTodo(index);
     };
-
     const changeTodoselected = (index: number) => {
       if (storeTodos.value[index].done) return;
       accessor.todos.changeTodoselected(index);
     };
-
     const changeTaskName = (id: string, e: Event) => {
       if (e.target instanceof HTMLInputElement) {
         accessor.todos.changeTaskName({
@@ -160,11 +151,9 @@ export default defineComponent({
         });
       }
     };
-
     const allClear = () => {
       accessor.todos.allClear();
     };
-
     return {
       toggleStatus,
       newTaskName,
@@ -180,6 +169,7 @@ export default defineComponent({
       allClear,
     };
   },
+  components: { ReturnTopPage },
 });
 </script>
 
