@@ -156,7 +156,7 @@ export default defineComponent({
       if (e.target instanceof HTMLInputElement) {
         accessor.todos.changeTaskName({
           id: id,
-          newTaskName: e.target.value,
+          taskName: e.target.value,
         });
       }
     };
