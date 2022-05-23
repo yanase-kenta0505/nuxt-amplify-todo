@@ -1,10 +1,9 @@
 <template>
   <v-card width="600px" class="mx-auto mt-10 d-flex" tile>
     <all-clear-btn @all-clear="allClear" class="align-self-center ml-2" />
-
     <v-text-field
       :value="value"
-      @input="$emit('input',$event)"
+      @input="$emit('input', $event)"
       @keydown.enter="addTodo"
       autofocus
       autocomplete="off"
