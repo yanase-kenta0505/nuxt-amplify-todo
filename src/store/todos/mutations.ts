@@ -1,9 +1,8 @@
 import { mutationTree } from "typed-vuex";
-import { TodosType, Item } from "~/types/data";
-import  state  from "./state";
+import { TodosType } from "~/types/data";
+import state from "./state";
 
-
- const mutations = mutationTree(state, {
+const mutations = mutationTree(state, {
   addTodo(state, newTodoItem: TodosType) {
     state.storeTodos.push(newTodoItem);
   },
@@ -16,14 +15,14 @@ import  state  from "./state";
     changeItem.done = !changeItem.done;
   },
 
-  changeTaskName(state, item: Item) {
+  changeTaskName(state, item: Pick<TodosType, "id" | "taskName">) {
     const selectedIndex = state.storeTodos.findIndex(
       (todo) => todo.id === item.id
     );
-    if (item.newTaskName === "") {
+    if (item.taskName === "") {
       state.storeTodos.splice(selectedIndex, 1);
     } else {
-      state.storeTodos[selectedIndex].taskName = item.newTaskName;
+      state.storeTodos[selectedIndex].taskName = item.taskName;
       state.storeTodos[selectedIndex].selected = false;
     }
   },
@@ -36,4 +35,4 @@ import  state  from "./state";
   },
 });
 
-export default mutations
+export default mutations;
