@@ -1,6 +1,6 @@
 <template>
-  <v-btn width="100%" height="100%" class="blue">
-    <p class="white--text ma-0 pa-0 font-weight-bold" @click="router.push('/')">
+  <v-btn width="100%" height="100%" class="blue" @click="router.push('/')">
+    <p class="white--text ma-0 pa-0 font-weight-bold" >
       Top Page
     </p>
   </v-btn>
