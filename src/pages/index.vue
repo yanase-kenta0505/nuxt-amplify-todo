@@ -6,19 +6,29 @@
         height="100%"
       >
         <v-btn
-          @click="router.push('/todos')"
+          nuxt
+          to="/todos"
           elevation="13"
           width="200"
           height="100"
-          class="blue mb-10"
+          class="blue mb-10 white--text text-h5"
         >
-          <h2 class="white--text">タスク管理画面へ</h2>
+          <!-- <v-btn>内に<h2>が入るのはHTML的によろしくない -->
+          <!-- Text and Typographでtext-**を使う -->
+          localStorage式タスク管理
+        </v-btn>
+
+        <v-btn
+        >
+          Amplify式タスク管理
         </v-btn>
       </v-card>
     </v-app>
 </template>
 
-<script lang="ts">
+<!-- <script lang="ts">
+// <v-btn nuxt to="url">でページ遷移できるので、このコードブロックが不要になる
+
 import { defineComponent } from "@nuxtjs/composition-api";
 import { useRouter } from "@nuxtjs/composition-api";
 
@@ -30,4 +40,4 @@ export default defineComponent({
     return { router };
   },
 });
-</script>
+</script> -->
