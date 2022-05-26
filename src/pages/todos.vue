@@ -92,8 +92,7 @@
 import { defineComponent, ref, computed } from "@nuxtjs/composition-api";
 import type { TodosType } from "~~/types/data";
 import { Status } from "~/enums/Status";
-import { useAccessor } from "~/hooks/useAccessor";
-import ReturnTopPage from "~/components/ReturnTopPage.vue";
+import { useAccessor } from "~/composables/useAccessor";
 
 export default defineComponent({
   setup() {
@@ -101,30 +100,21 @@ export default defineComponent({
     //v-text-fieldに入力された値が反映される
     const newTaskName = ref("");
     const toggleStatus = ref(Status.All);
-    let storeTodos = computed(() => {
-      const state_storeTodos = accessor.todos.storeTodos;
-      return JSON.parse(JSON.stringify(state_storeTodos));
-    });
+    const storeTodos = computed(() => accessor.todos.storeTodos);
     //絞り込みのボタンが押されるたびに（toggleStatusの内容が変わるたびに）表示するタスクを変更
     const filteredTodos = computed(() => {
       switch (toggleStatus.value) {
         case Status.Active:
-          return storeTodos.value.filter(
-            (todo: TodosType) => todo.done === false
-          );
+          return storeTodos.value.filter((todo) => todo.done === false);
         case Status.Completed:
-          return storeTodos.value.filter(
-            (todo: TodosType) => todo.done === true
-          );
+          return storeTodos.value.filter((todo) => todo.done === true);
         case Status.All:
           return storeTodos.value;
       }
     });
     //完了していないタスクの個数を集計する
     const findDoneItemLength = computed(() => {
-      const findDoneItem = storeTodos.value.filter(
-        (todo: TodosType) => !todo.done
-      );
+      const findDoneItem = storeTodos.value.filter((todo) => !todo.done);
       return findDoneItem.length;
     });
     const changeTodoDone = (id: string) => {
@@ -168,7 +158,6 @@ export default defineComponent({
       allClear,
     };
   },
-  components: { ReturnTopPage },
 });
 </script>
 

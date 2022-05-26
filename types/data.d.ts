@@ -5,7 +5,3 @@ export interface TodosType {
   selected: boolean;
   done: boolean;
 }
-
-
-
-
