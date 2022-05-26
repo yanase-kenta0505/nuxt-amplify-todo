@@ -14,13 +14,14 @@
         >
           <h2 class="white--text">タスク管理画面へ</h2>
         </v-btn>
-        </v-card>
+      </v-card>
     </v-app>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "@nuxtjs/composition-api";
 import { useRouter } from "@nuxtjs/composition-api";
+
 
 export default defineComponent({
   setup() {
