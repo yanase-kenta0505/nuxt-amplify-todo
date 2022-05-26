@@ -90,7 +90,6 @@
 
 <script lang="ts">
 import { defineComponent, ref, computed } from "@nuxtjs/composition-api";
-
 import type { TodosType } from "~~/types/data";
 import { Status } from "~/enums/Status";
 import { useAccessor } from "~/hooks/useAccessor";

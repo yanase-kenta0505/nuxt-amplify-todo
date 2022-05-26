@@ -1,4 +1,4 @@
-import { Amplify } from 'aws-amplify'
+import {Amplify} from 'aws-amplify'
 import type { Plugin } from '@nuxt/types'
 
 //default exportなので名前は自由
