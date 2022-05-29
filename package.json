@@ -9,7 +9,7 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
-    "@aws-amplify/ui-vue": "^2.4.7",
+    "@aws-amplify/ui-components": "^1.9.6",
     "@nuxtjs/composition-api": "^0.32.0",
     "aws-amplify": "^4.3.23",
     "core-js": "^3.19.3",
