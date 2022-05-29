@@ -82,14 +82,16 @@
         </v-list-item-group>
       </v-list>
     </v-card>
-    <v-card width="600px" height="50" class="mx-auto mt-5">
-      <ReturnTopPage />
+
+
+    <v-card width="600" class="mx-auto mt-5" @click="router.push('/')">
+      <amplify-sign-out />
     </v-card>
   </v-app>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed } from "@nuxtjs/composition-api";
+import { defineComponent, ref, computed,useRouter } from "@nuxtjs/composition-api";
 import type { TodosType } from "~~/types/data";
 import { Status } from "~/enums/Status";
 import { useAccessor } from "~/composables/useAccessor";
@@ -97,6 +99,7 @@ import { useAccessor } from "~/composables/useAccessor";
 export default defineComponent({
   setup() {
     const accessor = useAccessor();
+    const router = useRouter()
     //v-text-fieldに入力された値が反映される
     const newTaskName = ref("");
     const toggleStatus = ref(Status.All);
@@ -150,12 +153,14 @@ export default defineComponent({
       filteredTodos,
       findDoneItemLength,
       Status,
+      router,
       changeTodoDone,
       addTodo,
       deleteTodo,
       changeTodoselected,
       changeTaskName,
       allClear,
+
     };
   },
 });

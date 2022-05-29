@@ -1,4 +1,5 @@
 <template>
+ <amplify-authenticator>
   <v-app>
     <v-card
       class="d-flex flex-column justify-center align-center"
@@ -16,7 +17,7 @@
         localStorage式<br>タスク管理
       </v-btn>
       <v-btn
-       
+
         elevation="13"
         width="200"
         height="100"
@@ -26,4 +27,5 @@
       </v-btn>
     </v-card>
   </v-app>
+  </amplify-authenticator>
 </template>
