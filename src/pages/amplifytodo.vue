@@ -92,11 +92,9 @@
 
 <script lang="ts">
 import { defineComponent, ref, computed,useRouter } from "@nuxtjs/composition-api";
-//TODO:インポートする際に~（チルダ）が使用できない
-import type { TodosType } from "../../types/data";
-import { Status } from "../enums/Status";
-// import { useAccessor } from "";
-import { useAccessor } from "../composables/useAccessor";
+import type { TodosType } from "~~/types/data";
+import { Status } from "~/enums/Status";
+import { useAccessor } from "~/composables/useAccessor";
 
 export default defineComponent({
   setup() {
@@ -127,7 +125,8 @@ export default defineComponent({
     };
     const addTodo = (newTask: TodosType) => {
       if (newTask.taskName === "") return;
-      accessor.todos.addTodo(newTask);
+      // accessor.todos.addTodo(newTask);
+      accessor.amplifyTodos.addTodo(newTaskName)
       newTaskName.value = "";
     };
     const deleteTodo = (index: number) => {
