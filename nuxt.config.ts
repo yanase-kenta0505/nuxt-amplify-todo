@@ -9,6 +9,7 @@ export default {
 
   srcDir: 'src/',
 
+  telemetry: false,
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
