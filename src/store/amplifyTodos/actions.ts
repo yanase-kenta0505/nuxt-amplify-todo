@@ -2,10 +2,10 @@ import { actionTree } from "typed-vuex"
 import { TodosType } from "~~/types/data";
 import state from "~/store/amplifyTodos/state";
 import mutations from "~/store/amplifyTodos/mutations";
-import { createTodo } from "~/graphql/mutations";
+import { createTodo,deleteTodo } from "~/graphql/mutations";
 import { API, graphqlOperation } from "aws-amplify";
 import { listTodos } from "~/graphql/queries";
-import { onCreateTodo } from "~/graphql/subscriptions";
+import { onCreateTodo,onDeleteTodo } from "~/graphql/subscriptions";
 
 export default actionTree(
   { state, mutations },
@@ -17,7 +17,7 @@ export default actionTree(
 
 
       //TODO : 型定義をする
-      const subscription = API.graphql(graphqlOperation(onCreateTodo)).subscribe({
+      const subscriptionCreate = API.graphql(graphqlOperation(onCreateTodo)).subscribe({
         next: (subscribeTodo) => {
           const todo = subscribeTodo.value.data.onCreateTodo
           commit('setTodos',[...state.amplifyTodos,todo])
@@ -25,14 +25,23 @@ export default actionTree(
         error: error => {
           console.warn(error)
         }
+      })
 
+      const subscriptionDelete = API.graphql(graphqlOperation(onDeleteTodo)).subscribe({
+        next:(subscribeTodo)=>{
+          const todo = state.amplifyTodos.filter(amplifyTodo=>amplifyTodo.id !== subscribeTodo.value.data.onDeleteTodo.id)
+          commit('setTodos',todo)
+        }
       })
     },
 
     async addTodo(context, newTodoItem: TodosType) {
-      console.log(newTodoItem)
       await API.graphql(graphqlOperation(createTodo, { input: newTodoItem }))
     },
+
+    async deleteTodo(context,selectId:string){
+      await API.graphql(graphqlOperation(deleteTodo,{input:{id:selectId}}))
+    }
 
 
   }

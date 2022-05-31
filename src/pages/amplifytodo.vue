@@ -140,7 +140,7 @@ export default defineComponent({
       newTaskName.value = "";
     };
     const deleteTodo = (index: number) => {
-      accessor.todos.deleteTodo(index);
+      accessor.amplifyTodos.deleteTodo(storeTodos.value[index].id);
     };
     const changeTodoselected = (index: number) => {
       if (storeTodos.value[index].done) return;
