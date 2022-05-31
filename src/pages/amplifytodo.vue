@@ -131,7 +131,7 @@ export default defineComponent({
       return findDoneItem.length;
     });
     const changeTodoDone = (id: string) => {
-      accessor.todos.changeTodoDone(id);
+      accessor.amplifyTodos.changeTodoDone(id);
     };
     const addTodo = (newTask: TodosType) => {
       if (newTask.taskName === "") return;
@@ -144,11 +144,11 @@ export default defineComponent({
     };
     const changeTodoselected = (index: number) => {
       if (storeTodos.value[index].done) return;
-      accessor.todos.changeTodoselected(index);
+      accessor.amplifyTodos.changeTodoselected(storeTodos.value[index].id);
     };
     const changeTaskName = (id: string, e: Event) => {
       if (e.target instanceof HTMLInputElement) {
-        accessor.todos.changeTaskName({
+        accessor.amplifyTodos.changeTaskName({
           id: id,
           taskName: e.target.value,
         });
