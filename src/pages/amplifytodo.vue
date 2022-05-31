@@ -83,6 +83,9 @@
       </v-list>
     </v-card>
 
+    <ul v-for="todo in storeTodos">
+      <li>{{todo}}</li>
+    </ul>
 
     <v-card width="600" class="mx-auto mt-5" @click="router.push('/')">
       <amplify-sign-out />
@@ -91,19 +94,26 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed,useRouter } from "@nuxtjs/composition-api";
+import { defineComponent, ref, computed,useRouter,onMounted } from "@nuxtjs/composition-api";
 import type { TodosType } from "~~/types/data";
 import { Status } from "~/enums/Status";
 import { useAccessor } from "~/composables/useAccessor";
 
 export default defineComponent({
   setup() {
+    onMounted(()=>{
+      accessor.amplifyTodos.initTodos()
+    })
+
     const accessor = useAccessor();
     const router = useRouter()
     //v-text-fieldに入力された値が反映される
     const newTaskName = ref("");
     const toggleStatus = ref(Status.All);
-    const storeTodos = computed(() => accessor.todos.storeTodos);
+    const storeTodos = computed(() => accessor.amplifyTodos.amplifyTodos);
+    
+
+
     //絞り込みのボタンが押されるたびに（toggleStatusの内容が変わるたびに）表示するタスクを変更
     const filteredTodos = computed(() => {
       switch (toggleStatus.value) {
@@ -126,7 +136,7 @@ export default defineComponent({
     const addTodo = (newTask: TodosType) => {
       if (newTask.taskName === "") return;
       // accessor.todos.addTodo(newTask);
-      accessor.amplifyTodos.addTodo(newTaskName)
+      accessor.amplifyTodos.addTodo(newTask)
       newTaskName.value = "";
     };
     const deleteTodo = (index: number) => {
