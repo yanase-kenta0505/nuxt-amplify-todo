@@ -17,7 +17,8 @@
         localStorage式<br>タスク管理
       </v-btn>
       <v-btn
-
+        nuxt
+        to="/amplifytodo"
         elevation="13"
         width="200"
         height="100"
