@@ -6,7 +6,9 @@ import state from "./state";
 export default mutationTree(state, {
   setTodos(state, todos: any[]) {
     state.amplifyTodos = todos
-  }
+  },
+  
 });
+
 
 
