@@ -6,7 +6,11 @@
     "gqlSchemaPath": "/Users/yanasekenta/Desktop/project/nuxt-amplify-todo/amplify/backend/api/nuxtamplifytodo/schema.graphql",
     "defaultAuthType": {
       "mode": "API_KEY",
-      "expirationTime": 7
-    }
+      "expirationTime": 365,
+      "apiKeyExpirationDate": "2023-06-09T12:06:39.074Z",
+      "keyDescription": ""
+    },
+    "conflictResolution": {},
+    "additionalAuthTypes": []
   }
 }

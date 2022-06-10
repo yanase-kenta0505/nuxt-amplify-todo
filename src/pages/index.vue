@@ -1,5 +1,5 @@
 <template>
- <amplify-authenticator>
+ 
   <v-app>
     <v-card
       class="d-flex flex-column justify-center align-center"
@@ -28,7 +28,6 @@
       </v-btn>
     </v-card>
   </v-app>
-  </amplify-authenticator>
 </template>
 
 <script lang="ts">
