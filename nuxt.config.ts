@@ -33,7 +33,8 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     { src: "~/plugins/persistedState.ts", ssr: false },
-    { src: '~/plugins/amplify.ts', mode: 'client' }
+    { src: '~/plugins/amplify.ts', mode: 'client' },
+    { src: '~plugins/lodash.ts' },
   ],
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,

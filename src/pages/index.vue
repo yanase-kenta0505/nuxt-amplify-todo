@@ -1,5 +1,5 @@
 <template>
- <amplify-authenticator>
+ 
   <v-app>
     <v-card
       class="d-flex flex-column justify-center align-center"
@@ -28,5 +28,20 @@
       </v-btn>
     </v-card>
   </v-app>
-  </amplify-authenticator>
 </template>
+
+<script lang="ts">
+
+// import { defineComponent } from "@nuxtjs/composition-api";
+// import _ from "lodash";
+
+
+// export default defineComponent({
+//   setup(){
+//     const arr1 = ['a','b','c']
+//     const arr2 = ['d','e','f']
+
+//     console.log(_.drop(arr1))
+//   }
+// })
+</script>
