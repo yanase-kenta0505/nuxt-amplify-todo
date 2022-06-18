@@ -7,6 +7,8 @@ export type CreateTodoInput = {
   taskName: string,
   selected: boolean,
   done: boolean,
+  createdAt?: string | null,
+  updatedAt?: string | null,
 };
 
 export type ModelTodoConditionInput = {
@@ -14,6 +16,8 @@ export type ModelTodoConditionInput = {
   taskName?: ModelStringInput | null,
   selected?: ModelBooleanInput | null,
   done?: ModelBooleanInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
   and?: Array< ModelTodoConditionInput | null > | null,
   or?: Array< ModelTodoConditionInput | null > | null,
   not?: ModelTodoConditionInput | null,
@@ -72,8 +76,8 @@ export type Todo = {
   taskName: string,
   selected: boolean,
   done: boolean,
-  createdAt: string,
-  updatedAt: string,
+  createdAt?: string | null,
+  updatedAt?: string | null,
 };
 
 export type UpdateTodoInput = {
@@ -81,6 +85,8 @@ export type UpdateTodoInput = {
   taskName?: string | null,
   selected?: boolean | null,
   done?: boolean | null,
+  createdAt?: string | null,
+  updatedAt?: string | null,
 };
 
 export type DeleteTodoInput = {
@@ -92,6 +98,8 @@ export type ModelTodoFilterInput = {
   taskName?: ModelStringInput | null,
   selected?: ModelBooleanInput | null,
   done?: ModelBooleanInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
   and?: Array< ModelTodoFilterInput | null > | null,
   or?: Array< ModelTodoFilterInput | null > | null,
   not?: ModelTodoFilterInput | null,
@@ -115,8 +123,8 @@ export type CreateTodoMutation = {
     taskName: string,
     selected: boolean,
     done: boolean,
-    createdAt: string,
-    updatedAt: string,
+    createdAt?: string | null,
+    updatedAt?: string | null,
   } | null,
 };
 
@@ -132,8 +140,8 @@ export type UpdateTodoMutation = {
     taskName: string,
     selected: boolean,
     done: boolean,
-    createdAt: string,
-    updatedAt: string,
+    createdAt?: string | null,
+    updatedAt?: string | null,
   } | null,
 };
 
@@ -149,8 +157,8 @@ export type DeleteTodoMutation = {
     taskName: string,
     selected: boolean,
     done: boolean,
-    createdAt: string,
-    updatedAt: string,
+    createdAt?: string | null,
+    updatedAt?: string | null,
   } | null,
 };
 
@@ -165,8 +173,8 @@ export type GetTodoQuery = {
     taskName: string,
     selected: boolean,
     done: boolean,
-    createdAt: string,
-    updatedAt: string,
+    createdAt?: string | null,
+    updatedAt?: string | null,
   } | null,
 };
 
@@ -185,8 +193,8 @@ export type ListTodosQuery = {
       taskName: string,
       selected: boolean,
       done: boolean,
-      createdAt: string,
-      updatedAt: string,
+      createdAt?: string | null,
+      updatedAt?: string | null,
     } | null >,
     nextToken?: string | null,
   } | null,
@@ -199,8 +207,8 @@ export type OnCreateTodoSubscription = {
     taskName: string,
     selected: boolean,
     done: boolean,
-    createdAt: string,
-    updatedAt: string,
+    createdAt?: string | null,
+    updatedAt?: string | null,
   } | null,
 };
 
@@ -211,8 +219,8 @@ export type OnUpdateTodoSubscription = {
     taskName: string,
     selected: boolean,
     done: boolean,
-    createdAt: string,
-    updatedAt: string,
+    createdAt?: string | null,
+    updatedAt?: string | null,
   } | null,
 };
 
@@ -223,7 +231,7 @@ export type OnDeleteTodoSubscription = {
     taskName: string,
     selected: boolean,
     done: boolean,
-    createdAt: string,
-    updatedAt: string,
+    createdAt?: string | null,
+    updatedAt?: string | null,
   } | null,
 };

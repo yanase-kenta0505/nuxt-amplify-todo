@@ -6,5 +6,7 @@ type Todo @model {
   id: String!
   taskName: String!
   selected: Boolean!
-  done:Boolean!
+  done:Boolean!,
+  createdAt:String,
+  updatedAt:String
 }
