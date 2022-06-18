@@ -34,9 +34,8 @@ export default actionTree(
 
       const subscriptionUpdate = API.graphql(graphqlOperation(onUpdateTodo)).subscribe({
         next: (subscribeTodo) => {
-          const todo = subscribeTodo.value.data.onUpdateTodo
-          // const newAmplifyTodos = state.amplifyTodos.filter(amplifyTodo => amplifyTodo.id !== todo.id)
-          commit('changeTodo',todo)
+          const todo = subscribeTodo.value.data.onUpdateTodoer(amplifyTodo => amplifyTodo.id !== todo.id)
+          commit('changeTodo', todo)
         }
       })
     },
@@ -49,22 +48,14 @@ export default actionTree(
       await API.graphql(graphqlOperation(deleteTodo, { input: { id: selectId } }))
     },
 
-    async changeTodoDone({ state }, selectId: string) {
-      const selectedTodo = state.amplifyTodos.find(amplifyTodo => amplifyTodo.id === selectId)
-      await API.graphql(graphqlOperation(updateTodo, { input: { id: selectId, done: !selectedTodo.done } }))
-    },
-
-    async changeTodoselected({ state }, selectId: string) {
-      const selectedTodo = state.amplifyTodos.find(amplifyTodo => amplifyTodo.id === selectId)
-      await API.graphql(graphqlOperation(updateTodo, { input: { id: selectId, selected: !selectedTodo.selected } }))
-
-    },
-    async changeTaskName({ state }, items: any) {
-      const selectedTodo = state.amplifyTodos.find(amplifyTodo => amplifyTodo.id === items.id)
-      await API.graphql(graphqlOperation(updateTodo, { input: { id: items.id, taskName: items.taskName } }))
+    async updateToDo(context,input) {
+      console.log(input)
+       try {
+        await API.graphql(graphqlOperation(updateTodo, { input }))
+      } catch (error) {
+        console.log(error)
+      }
     }
-
-
   }
 );
 

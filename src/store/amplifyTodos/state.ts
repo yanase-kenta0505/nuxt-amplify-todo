@@ -1,8 +1,9 @@
+import { Todo } from "~/API";
 
 
 //TODO : anyを使わないよう方法を考える
 const state = () => ({
-  amplifyTodos : [] as any[],
+  amplifyTodos : <Todo[]>[]
 });
 
 export default state;
