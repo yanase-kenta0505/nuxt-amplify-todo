@@ -34,7 +34,7 @@ export default actionTree(
 
       const subscriptionUpdate = API.graphql(graphqlOperation(onUpdateTodo)).subscribe({
         next: (subscribeTodo) => {
-          const todo = subscribeTodo.value.data.onUpdateTodoer(amplifyTodo => amplifyTodo.id !== todo.id)
+          const todo = subscribeTodo.value.data.onUpdateTodo
           commit('changeTodo', todo)
         }
       })
