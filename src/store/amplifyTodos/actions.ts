@@ -1,11 +1,12 @@
 import { actionTree } from "typed-vuex"
-import { TodosType } from "~~/types/data";
 import state from "~/store/amplifyTodos/state";
 import mutations from "~/store/amplifyTodos/mutations";
 import { createTodo, deleteTodo, updateTodo } from "~/graphql/mutations";
 import { API, graphqlOperation } from "aws-amplify";
 import { listTodos } from "~/graphql/queries";
 import { onCreateTodo, onDeleteTodo, onUpdateTodo } from "~/graphql/subscriptions";
+import { CreateTodoInput, DeleteTodoInput, UpdateTodoInput } from "~/API";
+import Observable from 'zen-observable'
 
 export default actionTree(
   { state, mutations },
@@ -17,6 +18,7 @@ export default actionTree(
 
 
       //TODO : 型定義をする
+
       const subscriptionCreate = API.graphql(graphqlOperation(onCreateTodo)).subscribe({
         next: (subscribeTodo) => {
           const todo = subscribeTodo.value.data.onCreateTodo
@@ -40,17 +42,17 @@ export default actionTree(
       })
     },
 
-    async addTodo(context, newTodoItem: TodosType) {
-      await API.graphql(graphqlOperation(createTodo, { input: newTodoItem }))
+    async addTodo(_, input: CreateTodoInput) {
+      await API.graphql(graphqlOperation(createTodo, { input }))
     },
 
-    async deleteTodo(context, selectId: string) {
-      await API.graphql(graphqlOperation(deleteTodo, { input: { id: selectId } }))
+    async deleteTodo(_, input: DeleteTodoInput) {
+      await API.graphql(graphqlOperation(deleteTodo, { input }))
     },
 
-    async updateToDo(context,input) {
+    async updateToDo(_, input: UpdateTodoInput) {
       console.log(input)
-       try {
+      try {
         await API.graphql(graphqlOperation(updateTodo, { input }))
       } catch (error) {
         console.log(error)

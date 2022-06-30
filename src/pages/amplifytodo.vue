@@ -52,10 +52,6 @@
         </v-list-item-group>
       </v-list>
     </v-card>
-
-    <ul v-for="todo in storeTodos">
-      <li>{{ todo }}</li>
-    </ul>
   </v-app>
 </template>
 
@@ -71,7 +67,7 @@ import {
 import type { TodosType } from "~~/types/data"
 import { Status } from "~/enums/Status"
 import { useAccessor } from "~/composables/useAccessor"
-import { Todo } from "~/API"
+import { CreateTodoInput, Todo, UpdateTodoInput } from "~/API"
 
 export default defineComponent({
   setup() {
@@ -102,16 +98,17 @@ export default defineComponent({
       return findDoneItem.length
     })
     //追加
-    const addTodo = (newTask: TodosType) => {
+    const addTodo = (newTask: CreateTodoInput) => {
       if (newTask.taskName === "") return
-      // accessor.todos.addTodo(newTask);
       accessor.amplifyTodos.addTodo(newTask)
       newTaskName.value = ""
     }
 
     //削除
     const deleteTodo = (index: number) => {
-      accessor.amplifyTodos.deleteTodo(storeTodos.value[index].id)
+      accessor.amplifyTodos.deleteTodo({
+        id:storeTodos.value[index].id
+      })
     }
 
     const allClear = () => {
@@ -119,7 +116,7 @@ export default defineComponent({
     }
 
     //変更
-    const changeTodoDone = (todo: Todo) => {
+    const changeTodoDone = (todo: UpdateTodoInput) => {
      const currentTodo = JSON.parse(JSON.stringify(todo))
      currentTodo.done = !currentTodo.done
      console.log(currentTodo)
@@ -133,7 +130,8 @@ export default defineComponent({
     }
     const changeTaskName = (todo: Todo, e: Event) => {
       if (e.target instanceof HTMLInputElement) {
-        const currentTodo = JSON.parse(JSON.stringify(todo))
+        // const currentTodo = JSON.parse(JSON.stringify(todo))
+        const currentTodo = { ...todo }
         currentTodo.taskName = e.target.value
         accessor.amplifyTodos.updateToDo(currentTodo)
       }
