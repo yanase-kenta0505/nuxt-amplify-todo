@@ -1,21 +1,11 @@
 <template>
-  <v-card width="600px" class="mx-auto mt-10 d-flex" tile>
+  <v-card width="600px" class="mx-auto mt-10 d-flex"  tile >
     <all-clear-btn @all-clear="allClear" class="align-self-center ml-2" />
-    <v-text-field
-      :value="value"
-      @input="$emit('input', $event)"
-      @keydown.enter="addTodo"
-      autofocus
-      autocomplete="off"
-      clearable
-      color="primary"
-      hide-details="auto"
-      maxlength="20"
-      placeholder="What needs to be done?"
-      solo
-      flat
-      height="70px"
-    ></v-text-field>
+    <v-form @submit.prevent="addTodo">
+      <v-text-field  :value="value" @input="$emit('input', $event)" autofocus autocomplete="off" clearable
+        color="primary" hide-details="auto" maxlength="20" placeholder="What needs to be done?" solo flat
+        height="70px" />
+    </v-form>
   </v-card>
 </template>
 
@@ -31,6 +21,7 @@ export default defineComponent({
 
   setup(props, { emit }) {
     const addTodo = () => {
+      console.log('foo')
       emit("add-todo", {
         id: new Date().getTime().toString(16),
         taskName: props.value,
@@ -43,6 +34,8 @@ export default defineComponent({
       emit("all-clear");
     };
 
+
+
     return {
       addTodo,
       allClear,
@@ -52,7 +45,7 @@ export default defineComponent({
 </script>
 
 <style>
-.v-input__slot {
-  width: 95% !important;
+.v-form {
+  width: 90% !important;
 }
 </style>
