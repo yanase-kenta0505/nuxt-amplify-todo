@@ -19,14 +19,15 @@ export default defineComponent({
     },
   },
 
-  setup(props, { emit }) {
+  setup(props, { emit,root }) {
     const addTodo = () => {
-      console.log('foo')
+      console.log(root.$route.params.id)
       emit("add-todo", {
         id: new Date().getTime().toString(16),
         taskName: props.value,
         selected: false,
         done: false,
+        flag:root.$route.params.id
       });
     };
 

@@ -9,6 +9,7 @@ export const getTodo = /* GraphQL */ `
       taskName
       selected
       done
+      flag
       createdAt
       updatedAt
     }
@@ -26,6 +27,7 @@ export const listTodos = /* GraphQL */ `
         taskName
         selected
         done
+        flag
         createdAt
         updatedAt
       }

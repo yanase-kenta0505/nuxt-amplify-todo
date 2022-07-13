@@ -12,6 +12,7 @@ export const createTodo = /* GraphQL */ `
       taskName
       selected
       done
+      flag
       createdAt
       updatedAt
     }
@@ -27,6 +28,7 @@ export const updateTodo = /* GraphQL */ `
       taskName
       selected
       done
+      flag
       createdAt
       updatedAt
     }
@@ -42,6 +44,7 @@ export const deleteTodo = /* GraphQL */ `
       taskName
       selected
       done
+      flag
       createdAt
       updatedAt
     }
