@@ -9,8 +9,10 @@ export const getTodo = /* GraphQL */ `
       taskName
       selected
       done
+      flag
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -26,8 +28,10 @@ export const listTodos = /* GraphQL */ `
         taskName
         selected
         done
+        flag
         createdAt
         updatedAt
+        owner
       }
       nextToken
     }

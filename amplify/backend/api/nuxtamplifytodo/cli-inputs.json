@@ -3,7 +3,7 @@
   "serviceConfiguration": {
     "apiName": "nuxtamplifytodo",
     "serviceName": "AppSync",
-    "gqlSchemaPath": "/Users/yanasekenta/Desktop/project/nuxt-amplify-todo/amplify/backend/api/nuxtamplifytodo/schema.graphql",
+    "gqlSchemaPath": "/Users/yanasekenta/Desktop/project/yanaken/nuxt-amplify-todo/amplify/backend/api/nuxtamplifytodo/schema.graphql",
     "defaultAuthType": {
       "mode": "API_KEY",
       "expirationTime": 365,
@@ -11,6 +11,11 @@
       "keyDescription": ""
     },
     "conflictResolution": {},
-    "additionalAuthTypes": []
+    "additionalAuthTypes": [
+      {
+        "mode": "AMAZON_COGNITO_USER_POOLS",
+        "cognitoUserPoolId": "authnuxtamplifytodo26380a71"
+      }
+    ]
   }
 }

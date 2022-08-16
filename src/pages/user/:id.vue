@@ -40,11 +40,10 @@
             <v-list-item-content :class="[todo.done ? 'text-decoration-line-through' : '']">
               <v-text-field id="taskName" autocomplete="off" hide-details="auto" maxlength="20" solo flat height="30px"
                 :outlined="todo.selected && !todo.done" :disabled="!todo.selected || todo.done" :value="todo.taskName"
-                class="red--text" @blur="changeTaskName(todo, $event)"
-                @keydown.enter="changeTaskName(todo, $event)" />
+                class="red--text" @blur="changeTaskName(todo, $event)" @keydown.enter="changeTaskName(todo, $event)" />
             </v-list-item-content>
             <v-list-item-icon>
-              <edit-btn @edit-task-name="changeTodoselected(todo,index)" />
+              <edit-btn @edit-task-name="changeTodoselected(todo, index)" />
               <delete-btn @delete-item="deleteTodo(index)" />
             </v-list-item-icon>
           </v-list-item>
@@ -52,27 +51,33 @@
         </v-list-item-group>
       </v-list>
     </v-card>
+    <v-card class="mx-auto mt-10" width="600" tile>
+      <v-btn width="100%" color="orange" @click="signout">SignOut</v-btn>
+    </v-card>
   </v-app>
 </template>
 
 <script lang="ts">
+
 import {
   defineComponent,
-  reactive,
   ref,
   computed,
   useRouter,
   onMounted,
 } from "@nuxtjs/composition-api"
-import type { TodosType } from "~~/types/data"
 import { Status } from "~/enums/Status"
 import { useAccessor } from "~/composables/useAccessor"
 import { CreateTodoInput, Todo, UpdateTodoInput } from "~/API"
+import { Auth } from "aws-amplify"
 
 export default defineComponent({
-  setup() {
-    onMounted(() => {
-      accessor.amplifyTodos.initTodos()
+  middleware: 'auth',
+  setup(_, { root }) {
+    onMounted(async () => {
+      const user = await Auth.currentAuthenticatedUser()
+      console.log(user)
+      accessor.amplifyTodos.initTodos(user.username)
     })
 
     const accessor = useAccessor()
@@ -107,7 +112,7 @@ export default defineComponent({
     //削除
     const deleteTodo = (index: number) => {
       accessor.amplifyTodos.deleteTodo({
-        id:storeTodos.value[index].id
+        id: storeTodos.value[index].id
       })
     }
 
@@ -117,12 +122,12 @@ export default defineComponent({
 
     //変更
     const changeTodoDone = (todo: UpdateTodoInput) => {
-     const currentTodo = JSON.parse(JSON.stringify(todo))
-     currentTodo.done = !currentTodo.done
-     console.log(currentTodo)
-     accessor.amplifyTodos.updateToDo(currentTodo)
+      const currentTodo = JSON.parse(JSON.stringify(todo))
+      currentTodo.done = !currentTodo.done
+      console.log(currentTodo)
+      accessor.amplifyTodos.updateToDo(currentTodo)
     }
-    const changeTodoselected = (todo: Todo, index:string ) => {
+    const changeTodoselected = (todo: Todo, index: string) => {
       if (storeTodos.value[index].done) return
       const currentTodo = JSON.parse(JSON.stringify(todo))
       currentTodo.selected = !currentTodo.selected
@@ -136,6 +141,16 @@ export default defineComponent({
         accessor.amplifyTodos.updateToDo(currentTodo)
       }
     }
+    const signout = async () => {
+      try {
+        await Auth.signOut()
+        root.$router.push('/login')
+      } catch (error) {
+        console.log(error)
+      }
+
+    }
+
     return {
       toggleStatus,
       newTaskName,
@@ -150,6 +165,7 @@ export default defineComponent({
       changeTodoselected,
       changeTaskName,
       allClear,
+      signout
     }
   },
 })

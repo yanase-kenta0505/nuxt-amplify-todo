@@ -12,8 +12,10 @@ export const createTodo = /* GraphQL */ `
       taskName
       selected
       done
+      flag
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -27,8 +29,10 @@ export const updateTodo = /* GraphQL */ `
       taskName
       selected
       done
+      flag
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -42,8 +46,10 @@ export const deleteTodo = /* GraphQL */ `
       taskName
       selected
       done
+      flag
       createdAt
       updatedAt
+      owner
     }
   }
 `;
