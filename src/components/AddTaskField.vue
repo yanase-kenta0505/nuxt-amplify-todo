@@ -27,7 +27,7 @@ export default defineComponent({
         taskName: props.value,
         selected: false,
         done: false,
-        flag:root.$route.params.id
+        flag:root.$route.params.id,
       });
     };
 

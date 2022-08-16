@@ -51,39 +51,40 @@
         </v-list-item-group>
       </v-list>
     </v-card>
+    <v-card class="mx-auto mt-10" width="600" tile>
+      <v-btn width="100%" color="orange" @click="signout">SignOut</v-btn>
+    </v-card>
   </v-app>
 </template>
 
 <script lang="ts">
+
 import {
   defineComponent,
-  reactive,
   ref,
   computed,
   useRouter,
   onMounted,
 } from "@nuxtjs/composition-api"
-import type { TodosType } from "~~/types/data"
 import { Status } from "~/enums/Status"
 import { useAccessor } from "~/composables/useAccessor"
 import { CreateTodoInput, Todo, UpdateTodoInput } from "~/API"
+import { Auth } from "aws-amplify"
 
 export default defineComponent({
+  middleware: 'auth',
   setup(_, { root }) {
-    onMounted(() => {
-      accessor.amplifyTodos.initTodos()
+    onMounted(async () => {
+      const user = await Auth.currentAuthenticatedUser()
+      console.log(user)
+      accessor.amplifyTodos.initTodos(user.username)
     })
 
     const accessor = useAccessor()
     const router = useRouter()
     const newTaskName = ref("")
     const toggleStatus = ref(Status.All)
-    const storeTodos = computed(() => {
-      const todos = accessor.amplifyTodos.amplifyTodos
-      return todos.filter(todo => todo.flag === root.$route.params.id)
-    })
-
-    console.log(storeTodos)
+    const storeTodos = computed(() => accessor.amplifyTodos.amplifyTodos)
 
     //絞り込みのボタンが押されるたびに（toggleStatusの内容が変わるたびに）表示するタスクを変更
     const filteredTodos = computed(() => {
@@ -140,6 +141,16 @@ export default defineComponent({
         accessor.amplifyTodos.updateToDo(currentTodo)
       }
     }
+    const signout = async () => {
+      try {
+        await Auth.signOut()
+        root.$router.push('/login')
+      } catch (error) {
+        console.log(error)
+      }
+
+    }
+
     return {
       toggleStatus,
       newTaskName,
@@ -154,6 +165,7 @@ export default defineComponent({
       changeTodoselected,
       changeTaskName,
       allClear,
+      signout
     }
   },
 })

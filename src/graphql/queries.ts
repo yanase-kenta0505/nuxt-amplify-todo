@@ -12,6 +12,7 @@ export const getTodo = /* GraphQL */ `
       flag
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -30,6 +31,7 @@ export const listTodos = /* GraphQL */ `
         flag
         createdAt
         updatedAt
+        owner
       }
       nextToken
     }

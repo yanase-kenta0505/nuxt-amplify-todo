@@ -81,6 +81,7 @@ export type Todo = {
   flag: string,
   createdAt?: string | null,
   updatedAt?: string | null,
+  owner?: string | null,
 };
 
 export type UpdateTodoInput = {
@@ -131,6 +132,7 @@ export type CreateTodoMutation = {
     flag: string,
     createdAt?: string | null,
     updatedAt?: string | null,
+    owner?: string | null,
   } | null,
 };
 
@@ -149,6 +151,7 @@ export type UpdateTodoMutation = {
     flag: string,
     createdAt?: string | null,
     updatedAt?: string | null,
+    owner?: string | null,
   } | null,
 };
 
@@ -167,6 +170,7 @@ export type DeleteTodoMutation = {
     flag: string,
     createdAt?: string | null,
     updatedAt?: string | null,
+    owner?: string | null,
   } | null,
 };
 
@@ -184,6 +188,7 @@ export type GetTodoQuery = {
     flag: string,
     createdAt?: string | null,
     updatedAt?: string | null,
+    owner?: string | null,
   } | null,
 };
 
@@ -205,9 +210,14 @@ export type ListTodosQuery = {
       flag: string,
       createdAt?: string | null,
       updatedAt?: string | null,
+      owner?: string | null,
     } | null >,
     nextToken?: string | null,
   } | null,
+};
+
+export type OnCreateTodoSubscriptionVariables = {
+  owner?: string | null,
 };
 
 export type OnCreateTodoSubscription = {
@@ -220,7 +230,12 @@ export type OnCreateTodoSubscription = {
     flag: string,
     createdAt?: string | null,
     updatedAt?: string | null,
+    owner?: string | null,
   } | null,
+};
+
+export type OnUpdateTodoSubscriptionVariables = {
+  owner?: string | null,
 };
 
 export type OnUpdateTodoSubscription = {
@@ -233,7 +248,12 @@ export type OnUpdateTodoSubscription = {
     flag: string,
     createdAt?: string | null,
     updatedAt?: string | null,
+    owner?: string | null,
   } | null,
+};
+
+export type OnDeleteTodoSubscriptionVariables = {
+  owner?: string | null,
 };
 
 export type OnDeleteTodoSubscription = {
@@ -246,5 +266,6 @@ export type OnDeleteTodoSubscription = {
     flag: string,
     createdAt?: string | null,
     updatedAt?: string | null,
+    owner?: string | null,
   } | null,
 };

@@ -1,9 +1,9 @@
 <template>
   <v-app id="inspire">
     <v-container fluid fill-height>
-      <v-layout align-center justify-center>
-        <v-flex xs12 sm8 md4>
-          <v-card class="elevation-12">
+      <v-row justify="center">
+        <v-col cols="auto" align-self="center">
+          <v-card class="elevation-12 mx-auto" width="500" height="300" >
             <v-toolbar dark color="primary">
               <v-toolbar-title>Login form</v-toolbar-title>
             </v-toolbar>
@@ -11,8 +11,10 @@
               <v-form>
                 <v-text-field v-model="email" prepend-icon="mdi-account-circle" name="email" label="email" type="text">
                 </v-text-field>
-                <v-text-field v-model="password" id="password" prepend-icon="mdi-lock-outline" name="password"
-                  label="Password" type="password" v-if="!confirm">
+                <v-text-field v-model="password" id="password"
+                  :prepend-icon="hiddenPassword ? 'mdi-lock' : 'mdi-lock-open'" name="password" label="Password"
+                  :type="hiddenPassword ? 'password' : 'text'" @click:prepend="hiddenPassword = !hiddenPassword"
+                  v-if="!confirm" >
                 </v-text-field>
                 <v-text-field v-model="confirmId" id="confirmId" prepend-icon="mdi-fingerprint" name="confirmId"
                   label="ID" type="number" v-else>
@@ -26,8 +28,8 @@
               <v-btn color="primary" to="/login">Login画面へ</v-btn>
             </v-card-actions>
           </v-card>
-        </v-flex>
-      </v-layout>
+        </v-col>
+      </v-row>
     </v-container>
   </v-app>
 </template>
@@ -42,9 +44,15 @@ export default defineComponent({
     const password = ref('')
     const confirmId = ref(null)
     const confirm = ref(false)
+    const hiddenPassword = true
+    // const rules = [
+    //   (v: any) => !!v || '',
+    //   (v: any) => /.+@.+\..+/.test(v) || ''
+    // ]
 
 
-    onMounted(() =>{
+
+    onMounted(() => {
       confirm.value = false
     })
 
@@ -82,7 +90,8 @@ export default defineComponent({
       signup,
       confirm,
       confirmAuth,
-      confirmId
+      confirmId,
+      hiddenPassword
     }
   }
 })
