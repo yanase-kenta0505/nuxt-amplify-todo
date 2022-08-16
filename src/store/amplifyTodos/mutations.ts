@@ -6,6 +6,9 @@ export default mutationTree(state, {
 	setTodos(state, todos: any[]) {
 		state.amplifyTodos = todos
 	},
+  cleanStateData(state) {
+    state.amplifyTodos = []
+  },
 	changeTodo(state, todo) {
 		const changeItemIndex = state.amplifyTodos.findIndex((amplifyTodo) => {
 			return amplifyTodo.id === todo.id

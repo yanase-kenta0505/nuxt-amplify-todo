@@ -49,6 +49,10 @@ export default actionTree(
       })
     },
 
+    cleanStateData({commit}) {
+     commit('cleanStateData')
+    },
+
     async addTodo(_, input: CreateTodoInput) {
       await API.graphql({...graphqlOperation(createTodo, { input }),authMode: "AMAZON_COGNITO_USER_POOLS"})
     },
