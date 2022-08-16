@@ -144,6 +144,7 @@ export default defineComponent({
     const signout = async () => {
       try {
         await Auth.signOut()
+        accessor.amplifyTodos.cleanStateData()
         root.$router.push('/login')
       } catch (error) {
         console.log(error)
